@@ -33,4 +33,11 @@ class UserCaseSpirngApplicationTests {
 		assertThat(email).isEqualTo("joao@gmail.com");
 	}
 
+	@Test
+	void dontReturnUserWithInvalidId(){
+		ResponseEntity<String> response = restTemplate.getForEntity("/users/1", String.class);
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+		assertThat(response.getBody()).isBlank();
+	}
+
 }
